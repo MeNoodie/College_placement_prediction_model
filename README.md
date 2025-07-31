@@ -1,6 +1,6 @@
 # 🎓 College Placement Prediction Model
 
-A machine learning-based project that predicts % of a student is likely to be placed based on their academic records and other factors.
+A machine learning-based project that predicts % chances  for  a student to likely  be placed based on their academic records and other factors.
 
 ---
 
