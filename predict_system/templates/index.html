@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Placement Predictor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1'
+                        },
+                        success: {
+                            50: '#f0fdf4',
+                            500: '#22c55e',
+                            600: '#16a34a'
+                        },
+                        warning: {
+                            50: '#fffbeb',
+                            500: '#f59e0b',
+                            600: '#d97706'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="font-inter bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">
+                Welcome Everyone
+            </h1>
+            <h2 class="text-2xl md:text-3xl font-semibold text-gray-600 mb-6">
+                Predict Your College Placement
+            </h2>
+            <p class="text-lg text-gray-500 max-w-2xl mx-auto">
+                Enter your academic and extracurricular details to get an AI-powered prediction of your placement success
+            </p>
+        </div>
+
+        <!-- Main Card -->
+        <div class="bg-white rounded-3xl shadow-xl card-hover p-8 md:p-12">
+            <form id="placementForm" class="space-y-8">
+                <!-- Input Fields Grid -->
+                <div class="grid md:grid-cols-2 gap-6">
+                 <!-- Stream Selection -->
+<div class="space-y-2">
+    <label for="stream" class="block text-sm font-semibold text-gray-700">
+        Stream <span class="text-red-500">*</span>
+    </label>
+    <select
+        id="stream"
+        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
+        required
+    >
+        <option value="">Select Stream</option>
+        <option value="1">Computer Science and Engineering</option>
+        <option value="2">Electronics and Communication Engineering</option>
+        <option value="3">Information Technology</option>
+        <option value="4">Electrical Engineering</option>
+        <option value="5">Mechanical Engineering</option>
+        <option value="6">Civil Engineering</option>
+        <option value="7">Electrical and Electronics Engineering</option>
+        <option value="8">Computer Science in Data Science</option>
+        <option value="9">Computer Science and Design</option>
+        <option value="10">Computer Science in AIML</option>
+    </select>
+    <p class="text-xs text-gray-500">Choose your stream</p>
+</div>
+
+<!-- CGPA Input -->
+<div class="space-y-2">
+    <label for="cgpa" class="block text-sm font-semibold text-gray-700">
+        CGPA <span class="text-red-500">*</span>
+    </label>
+    <input
+        type="number"
+        id="cgpa"
+        min="0"
+        max="10"
+        step="0.1"
+        placeholder="e.g., 8.5"
+        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
+        required
+    >
+    <p class="text-xs text-gray-500">Enter your CGPA (0–10 scale)</p>
+</div>
+
+<!-- Internship Input (Yes/No) -->
+<div class="space-y-2">
+    <label class="block text-sm font-semibold text-gray-700">
+        Any prior industry internship experience? <span class="text-red-500">*</span>
+    </label>
+    <div class="flex space-x-4">
+        <label><input type="radio" name="internship" value="1" required> Yes</label>
+        <label><input type="radio" name="internship" value="0"> No</label>
+    </div>
+</div>
+
+<!-- Projects Input (Yes/No) -->
+<div class="space-y-2">
+    <label class="block text-sm font-semibold text-gray-700">
+        Have you done any industry level projects? <span class="text-red-500">*</span>
+    </label>
+    <div class="flex space-x-4">
+        <label><input type="radio" name="projects" value="1" required> Yes</label>
+        <label><input type="radio" name="projects" value="0"> No</label>
+    </div>
+</div>
+
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center pt-6">
+                    <button
+                        type="submit"
+                        id="submitBtn"
+                        class="bg-primary-600 hover:bg-primary-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                    >
+                        <span id="submitText">Predict Placement</span>
+                        <span id="loadingText" class="hidden">Analyzing...</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Results Section -->
+            <div id="results" class="hidden mt-8 pt-8 border-t border-gray-200">
+                <div id="resultContent" class="text-center"></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-12 text-gray-500">
+            <p>&copy; 2024 College Placement Predictor. Powered by AI.</p>
+        </div>
+    </div>
+
+    <script>
+document.getElementById('placementForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // Get CGPA
+    const cgpa = parseFloat(document.getElementById('cgpa').value);
+
+    // Get Stream (it's already in numeric form)
+    const stream = parseInt(document.getElementById('stream').value);
+
+    // Get Internship (radio yes/no, value="1" or "0")
+    const internships = parseInt(document.querySelector('input[name="internship"]:checked').value);
+
+    // Get Projects (radio yes/no, value="1" or "0")
+    const projects = parseInt(document.querySelector('input[name="projects"]:checked').value);
+
+    // Validate
+    if (isNaN(cgpa) || isNaN(stream) || isNaN(internships) || isNaN(projects)) {
+        alert('Please fill in all fields.');
+        return;
+    }
+
+    // Show loading
+    const submitBtn = document.getElementById('submitBtn');
+    const submitText = document.getElementById('submitText');
+    const loadingText = document.getElementById('loadingText');
+
+    submitBtn.disabled = true;
+    submitText.classList.add('hidden');
+    loadingText.classList.remove('hidden');
+
+    // Send to backend
+    fetch('/predict', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            cgpa: cgpa,
+            stream: stream,
+            internships: internships,
+            projects: projects
+        })
+    })
+    .then(response => response.json())
+    .then(result => {
+        displayResults(result.probability_percent);
+        submitBtn.disabled = false;
+        submitText.classList.remove('hidden');
+        loadingText.classList.add('hidden');
+    })
+    .catch(error => {
+        alert('Error communicating with server.');
+        console.error('Error:', error);
+        submitBtn.disabled = false;
+        submitText.classList.remove('hidden');
+        loadingText.classList.add('hidden');
+    });
+});
+
+function displayResults(percentage) {
+    const resultContainer = document.getElementById("results");
+    const resultBox = document.getElementById("resultContent");
+
+    resultBox.innerText = `🎯 Placement Chance: ${percentage}%`;
+    resultContainer.classList.remove("hidden");
+}
+</script>
